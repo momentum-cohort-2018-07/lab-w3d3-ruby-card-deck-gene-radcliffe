@@ -1,36 +1,40 @@
 require 'set'
 
 class Card
-    include Comparable
-    attr_accessor :rank, :suit
     
-    def initialize(rank, suit)
+    attr_accessor :rank
+    attr_accessor :suite
+    
+    def initialize(rank, suite)
         @rank = rank
-        @suit = suit
+        @suite = suite
         @card = nil
-        
-        @rank_hash={
-            :A=> 1, 
-            2=> 2,
-            3=> 3,
-            4=> 4,
-            5=> 5,
-            6=> 6,
-            7=> 7,
-            8=> 8,
-            9=> 9,
-            10=> 10,
-            :J=> 11,
-            :Q=>12,
-            :K=> 13,
-            }
-    
+        @rank_hash = nil
+        init_hash
     end
 
-    def <=>(other)
-        
-         return other.rank == self.rank && other.suit == self.suit 
-  
+    def init_hash
+      @rank_hash={
+        :A=> 1, 
+        2=> 2,
+        3=> 3,
+        4=> 4,
+        5=> 5,
+        6=> 6,
+        7=> 7,
+        8=> 8,
+        9=> 9,
+        10=> 10,
+        :J=> 11,
+        :Q=>12,
+        :K=> 13
+        }
+    end
+
+    def ==(other_card)
+      
+        self.rank == other_card.rank && self.suite == other_card.suite
+        # return other.rank == self.rank && other.suit == self.suit 
     end
 
     def greater_than?(other_card)
@@ -44,11 +48,11 @@ class Card
         end
     end
   
-      private
-      def get_rank_from_hash(card_rank)
-         #@rank_hash[card_rank.to_s.to_sym]
-         @rank_hash[card_rank]
-      end
+    
+    def get_rank_from_hash(card_rank)
+        #@rank_hash[card_rank.to_s.to_sym]
+        @rank_hash[card_rank]
+    end
   
     
     
